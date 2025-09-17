@@ -1,20 +1,50 @@
+import extras.*
 import pepita.*
 import comidas.*
+import direcciones.*
+import wollok.game.*
 
 describe "Tests de Pepita" {
 
 
-	test "Al comer pepita aumenta su energia" {
+	test "Al comer pepita aumenta su energia + 5" {
 		pepita.comer(manzana)
 		assert.equals(105, pepita.energia())
 	}
 
-	test "Al volar pepita pierde energia" {
-		pepita.volar(1)
-		assert.equals(89, pepita.energia())
+	test "Al volar 2 veces, pepita pierde 18 de energia" {
+		pepita.volar(2)
+		assert.equals(82, pepita.energia())
 	}
 
+	test "Al moverse arriba, pepita vuela desde la celda inicial (0,1) a la celda (0,2) y gasta 9 de energia"{
+		pepita.mover(arriba)
+		assert.equals(game.at(0,2), pepita.position())
+		assert.equals(91, pepita.energia())
+	}
 
+	test "Al estar sobre silvestre pierde"{
+		pepita.position(silvestre.position())
+
+		assert.equals("gris", pepita.estado())
+	}
+
+	test "Al quedarse sin energia necesaria pierde"{
+		pepita.energia(8)
+
+		assert.equals("gris", pepita.estado())
+	}
+
+	test "Al estar sobre el nido gana"{
+		pepita.position(nido.position())
+		assert.equals("grande", pepita.estado())
+	}
+
+	test "Al estar atrapada, pierde"{
+		pepita.position(silvestre.position())
+
+		assert.equals("gris", pepita.estado())
+	}
 
 }
 
