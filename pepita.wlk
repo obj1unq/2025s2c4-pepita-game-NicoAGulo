@@ -19,8 +19,8 @@ object pepita {
 
 	method estado(){
 		return if (self.esAtrapada() || !self.puedeMover()){"gris"}
-			else if(self.enHogar()){"grande"}
-			else {"base"}
+		else if(self.enHogar()){"grande"}
+		else {"base"}
 	}
 
 	method estaSobre(alguien) = position == alguien.position()
@@ -34,8 +34,8 @@ object pepita {
 		return km*joules
 	}
 
-	method comer(comida) {
-		energia = energia + comida.energiaQueOtorga()
+	method comer(alimento) {
+		energia = energia + alimento.energiaQueOtorga()
 	}
 
 	method volar(kms) {
@@ -53,13 +53,19 @@ object pepita {
 		}
 	}
 
-	// method loQueHayAca()=game.uniqueCollider(self)
 
-	// method comerAca(){
-	// 	const comida = self.loQueHayAca()
-	// 	self.comer(comida)
-	// 	comida.andate()
-	// }
+	method comerAca(){
+		try{
+			const comida = self.loQueHayAca()
+			self.comer(comida)
+			comida.comer()
+			comida.andate()
+		}catch e {
+			game.say(self, "Aca no hay comida pibe")
+		}
+	}
+
+	method loQueHayAca()=game.uniqueCollider(self)
 
 	method perder() {
 		game.say(self, "Perdi!")

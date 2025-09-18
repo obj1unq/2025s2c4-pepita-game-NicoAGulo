@@ -2,6 +2,7 @@ import wollok.game.*
 import pepita.*
 import extras.*
 import direcciones.*
+import comidas.*
 
 program pepitaGame {
 	game.title("Pepita")
@@ -18,6 +19,7 @@ program pepitaGame {
 	
 	game.addVisual(nido)
 	game.addVisual(silvestre)
+	game.addVisual(manzana)
 	
 	game.addVisual(pepita)
 	
@@ -26,8 +28,8 @@ program pepitaGame {
 	keyboard.w().onPressDo({ pepita.mover(arriba) })
 	keyboard.s().onPressDo({ pepita.mover(abajo) })
 	keyboard.a().onPressDo({ pepita.mover(izquierda) })
-	keyboard.d().onPressDo({ pepita.mover(derecha) })
-	// keyboard.c().onPressDo({ pepita.comerAca() })
+	keyboard.d().onPressDo({ pepita.mover(derecha) }) 
+	keyboard.c().onPressDo({ pepita.comerAca() })
 	
 	
 	game.start()
