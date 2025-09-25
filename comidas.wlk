@@ -17,7 +17,7 @@ object manzana {
 	}
 
   	method estado(){
-    	return if (self.bocadosRestantes() == 2){"base"}
+    	return if (self.bocadosRestantes() == 2){"normal"}
 			else if(self.bocadosRestantes() == 1){"mordida"}
 			else {"terminada"}
  	}
@@ -30,15 +30,19 @@ object manzana {
 		return base * madurez	
 	}
 
-	method redibujarse(){
-	  game.removeVisual(self)
-	  game.addVisual(self)
-	}
+	// method redibujarse(){
+	//   game.removeVisual(self)
+	//   game.addVisual(self)
+	// }
 
 	method andate(){
 		if (bocadosRestantes==0){
 			game.removeVisual(self)
 		}
+	}
+
+	method interaccion(alguien){
+		game.say(alguien, "Wow! Una manzana " + self.estado())
 	}
 }
 

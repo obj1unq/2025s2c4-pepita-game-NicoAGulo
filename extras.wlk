@@ -2,8 +2,12 @@ import wollok.game.*
 import pepita.*
 
 object nido{
-    const property position = game.at(8,8)
-    method image()="nido.png"
+  const property position = game.at(8,8)
+  method image()="nido.png"
+
+  method interaccion(alguien){
+		game.say(alguien, "Llegue al nido")
+	}
 }
 
 
@@ -17,5 +21,4 @@ object silvestre {
   method position() = game.at(self.x(),0)
   method x()= presa.position().x().max(3)
 }
-
 

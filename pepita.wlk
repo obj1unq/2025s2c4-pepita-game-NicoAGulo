@@ -18,7 +18,7 @@ object pepita {
 	}
 
 	method estado(){
-		return if (self.esAtrapada() || !self.puedeMover()){"gris"}
+		return if (self.esAtrapada() || !self.puedeVolar()){"gris"}
 		else if(self.enHogar()){"grande"}
 		else {"base"}
 	}
@@ -28,7 +28,11 @@ object pepita {
 	method esAtrapada()= self.estaSobre(predador)
 	method enHogar() = self.estaSobre(hogar)
 	
-	method puedeMover() = energia>= self.energiaNecesaria(1) && not self.esAtrapada()
+	method puedeVolar() = energia>= self.energiaNecesaria(1) && not self.esAtrapada()
+
+	// method puedeMover(dir){
+	// 	return dir.x()<game.width() && dir.y()<game.height()
+	// }
 
 	method energiaNecesaria(km){
 		return km*joules
@@ -40,18 +44,17 @@ object pepita {
 
 	method volar(kms) {
 		energia -= self.energiaNecesaria(kms)
-		
 	}
 	
-	method mover(direccion){
-		if (self.puedeMover()){
-			self.volar(1)
-			position=direccion.siguiente(position)
-		}else{
-			self.perder()
-			//Cuando se queda sin energia, no pierde hasta que realice un mov mas
-		}
-	}
+	// method mover(direccion){
+	// 	if (self.puedeVolar() && puedeMover(direccion)){
+	// 		self.volar(1)
+	// 		position=direccion.siguiente(position)
+	// 	}else{
+	// 		self.perder()
+	// 		//Cuando se queda sin energia, no pierde hasta que realice un mov mas
+	// 	}
+	// }
 
 
 	method comerAca(){
@@ -59,7 +62,8 @@ object pepita {
 			const comida = self.loQueHayAca()
 			self.comer(comida)
 			comida.comer()
-			comida.andate()
+			game.onTick(3000,"comidaTerminada",{comida.andate()})
+			// comida.andate()
 		}catch e {
 			game.say(self, "Aca no hay comida pibe")
 		}

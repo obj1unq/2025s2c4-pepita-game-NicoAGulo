@@ -28,8 +28,10 @@ program pepitaGame {
 	keyboard.w().onPressDo({ pepita.mover(arriba) })
 	keyboard.s().onPressDo({ pepita.mover(abajo) })
 	keyboard.a().onPressDo({ pepita.mover(izquierda) })
-	keyboard.d().onPressDo({ pepita.mover(derecha) }) 
+	keyboard.d().onPressDo({ pepita.mover(derecha) })
 	keyboard.c().onPressDo({ pepita.comerAca() })
+	
+	game.onCollideDo(pepita, { algo => algo.interaccion(pepita) })
 	
 	
 	game.start()
